@@ -1,0 +1,10 @@
+[
+  "test_app.py::test_history",
+  "test_app.py::test_input_data",
+  "test_app.py::test_login",
+  "test_app.py::test_login_and_predict",
+  "test_app.py::test_login_fail",
+  "test_app.py::test_logout",
+  "test_app.py::test_predict",
+  "test_app.py::test_register"
+]

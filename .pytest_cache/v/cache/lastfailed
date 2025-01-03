@@ -1,0 +1,4 @@
+{
+  "test_app.py::test_predict": true,
+  "test_app.py::test_login_and_predict": true
+}
