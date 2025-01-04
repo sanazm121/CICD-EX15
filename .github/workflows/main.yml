@@ -54,8 +54,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
-    steps:
-      # Deploy application using ArvanCloud API
+    steps:     
+      # Deploy application using ArvanCloud CLI
       - name: Deploy to ArvanCloud PaaS
         uses: hatamiarash7/ar-paas-action@v1.3.0
         with:
