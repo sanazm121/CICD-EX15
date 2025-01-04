@@ -55,6 +55,14 @@ jobs:
     needs: build
 
     steps:
+      # نصب ابزار ArvanCloud CLI
+      - name: Install ArvanCloud CLI
+        run: |
+          mkdir -p ~/arvancloud
+          curl -L -o ~/arvancloud/arvancloud https://github.com/arvancloud/arvancloud-cli/releases/download/v1.3.3/arvancloud-cli-linux
+          chmod +x ~/arvancloud/arvancloud
+          sudo mv ~/arvancloud/arvancloud /usr/local/bin/ar-paas-action
+
       # Deploy application using ArvanCloud API
       - name: Deploy to ArvanCloud PaaS
         run: |
