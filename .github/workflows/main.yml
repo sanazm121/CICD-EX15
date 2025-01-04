@@ -59,13 +59,17 @@ jobs:
       - name: Install Git
         run: sudo apt-get update && sudo apt-get install -y git
 
+    
       # Clone ArvanCloud CLI repository
       - name: Clone ArvanCloud CLI
         run: |
           git clone https://github.com/arvancloud/cli.git
           cd cli
-          chmod +x arvancloud-cli
-          sudo mv arvancloud-cli /usr/local/bin/ar-paas-action
+          sudo apt-get update
+          sudo apt-get install golang-go
+          go build -o ar-paas-action pkg/cli/cli.go
+          sudo mv ar-paas-action /usr/local/bin/ar-paas-action
+
 
       # Deploy application using ArvanCloud CLI
       - name: Deploy to ArvanCloud PaaS
