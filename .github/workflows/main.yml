@@ -65,10 +65,14 @@ jobs:
         run: |
           git clone https://github.com/arvancloud/cli.git
           cd cli
+          
           sudo apt-get update
-          sudo apt-get install golang-go
+          sudo apt-get install -y libgpgme-dev libsqlite3-dev golang-go
+          # کامپایل کردن برنامه Go
           go build -o ar-paas-action pkg/cli/cli.go
+          # انتقال فایل اجرایی
           sudo mv ar-paas-action /usr/local/bin/ar-paas-action
+
 
 
       # Deploy application using ArvanCloud CLI
