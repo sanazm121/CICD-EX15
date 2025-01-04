@@ -55,20 +55,24 @@ jobs:
     needs: build
 
     steps:
-      # نصب ابزار ArvanCloud CLI
-      - name: Install ArvanCloud CLI
-        run: |
-          mkdir -p ~/arvancloud
-          curl -L -o ~/arvancloud/arvancloud https://github.com/arvancloud/arvancloud-cli/releases/download/v1.3.3/arvancloud-cli-linux
-          chmod +x ~/arvancloud/arvancloud
-          sudo mv ~/arvancloud/arvancloud /usr/local/bin/ar-paas-action
+      # Install Git
+      - name: Install Git
+        run: sudo apt-get update && sudo apt-get install -y git
 
-      # Deploy application using ArvanCloud API
+      # Clone ArvanCloud CLI repository
+      - name: Clone ArvanCloud CLI
+        run: |
+          git clone https://github.com/arvancloud/cli.git
+          cd cli
+          chmod +x arvancloud-cli
+          sudo mv arvancloud-cli /usr/local/bin/ar-paas-action
+
+      # Deploy application using ArvanCloud CLI
       - name: Deploy to ArvanCloud PaaS
         run: |
           echo "2" | ar-paas-action --auth ${{ secrets.R1C_API }} \
-                                    --namespace "Breast cancer app" \
-                                    --app test \
-                                    --container test-container \
-                                    --image ${{ secrets.DOCKER_USERNAME }}/flask-app:latest \
-                                    --version 1.3.3
+                            --namespace "Breast cancer app" \
+                            --app test \
+                            --container test-container \
+                            --image ${{ secrets.DOCKER_USERNAME }}/flask-app:latest \
+                            --version 1.3.3
