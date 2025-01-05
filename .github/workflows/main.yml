@@ -50,19 +50,5 @@ jobs:
           docker tag flask-app ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:     
-      # Deploy application using ArvanCloud CLI
-      - name: Deploy to ArvanCloud PaaS
-        uses: hatamiarash7/ar-paas-action@v1.3.0
-        with:
-          region: 2
-          auth: ${{ secrets.R1C_API }}
-          namespace: Breast cancer app
-          app: test
-          container: test-container
-          image: ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
-          version: 1.3.3
+ 
+  
