@@ -1,17 +1,22 @@
 FROM python:3.9-slim
 
+# Set the working directory
 WORKDIR /app
 
-COPY . /app
-
-# Copy requirements first to cache dependencies
+# Copy requirements file to leverage Docker cache
 COPY requirements.txt /app
 
-# Upgrade pip and install dependencies
+# Install dependencies
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-ENV Bearst Cancerr_Flask_App=app.py
+# Copy the rest of the application code
+COPY . /app
 
+# Set environment variables
+ENV FLASK_APP=app.py
+
+# Expose the application port
 EXPOSE 5000
 
+# Run the Flask app
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
